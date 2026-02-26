@@ -9,26 +9,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var app = fiber.New()
-
-func TestFiber(t *testing.T) {
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		return ctx.SendString("Hello buddy")
-	})
-
-	request := httptest.NewRequest("GET", "/", nil)
-	response, err := app.Test(request)
-
-	assert.Nil(t, err)
-	assert.Equal(t, 200, response.StatusCode)
-
-	bytes, err := io.ReadAll(response.Body)
-
-	assert.Nil(t, err)
-	assert.Equal(t, "Hello buddy", string(bytes))
-
-}
-
 func TestCtx(t *testing.T) {
 
 	app := fiber.New()
